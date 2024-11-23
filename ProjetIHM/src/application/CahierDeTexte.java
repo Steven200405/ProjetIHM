@@ -49,19 +49,23 @@ public class CahierTexte extends Application{
 		Region spacer = new Region(); // Region est un conteneur- vide qui peut occuper l'espace horizontal/vertical 
 		hbox.setHgrow(spacer, Priority.ALWAYS); // setHgrow spécifit comment l'espace sur la ligne va être occupé.
 		
-		Button accueil = new Button("Accueil"); // a faire: renvoie vers la page "Accueil"
+		Button accueil = new Button("Accueil"); // a finir: remplir la page "Accueil"
 		hbox.setMargin(accueil, new Insets(20, 0, 0, 0));
 		accueil.setPrefSize(130, 50);
 		
-		MenuButton ressource = new MenuButton("Ressources élèves"); // a faire: mettre les MenuItem présents dans la page d'accueil.
+		MenuButton ressource = new MenuButton("Ressources élèves"); // a finir: mettre les MenuItem présents dans la page d'accueil.
 		hbox.setMargin(ressource, new Insets(20, 0, 0, 0));
 		ressource.setPrefSize(130, 50);
+		MenuItem pronote = new MenuItem("Pronote");
+		ressource.getItems().add(pronote);
 
-		MenuButton outil = new MenuButton("Outils"); // a faire: mettre les MenuItem présents dans la page d'accueil. Comme la page calculatrice et d'autres pages web.
+		MenuButton outil = new MenuButton("Outils"); // a finir: mettre les MenuItem présents dans la page d'accueil. Comme la page calculatrice et d'autres pages web.
 		hbox.setMargin(outil, new Insets(20, 0, 0, 0));
+		MenuItem calculatrice = new MenuItem("Calculatrice");
 		outil.setPrefSize(130, 50);
-
-		Button profil = new Button("Profil"); // a faire: renvoie vers la page "Profil"
+		outil.getItems().add(calculatrice);
+		
+		Button profil = new Button("Profil"); // a finir: remplir la page "Profil"
 		hbox.setMargin(profil, new Insets(20, 0, 0, 0));
 		profil.setPrefSize(130, 50);
 
@@ -73,6 +77,60 @@ public class CahierTexte extends Application{
 		contact.setPrefSize(130, 50);
 
 		hbox.getChildren().addAll(imLogo,spacer, accueil, outil, ressource, profil, contact);
+		
+		EventHandler <MouseEvent> allerAccueil = new EventHandler <MouseEvent> () {
+			@Override
+			public void handle(MouseEvent e) {
+				//Redirection vers la page d'accueil
+				Stage SecondaryStage = new Stage();
+				Accueil accueil = new Accueil(SecondaryStage);	
+				accueil.afficher(); // Naviguer vers Accueil
+			}
+		 };		        
+		accueil.addEventHandler(MouseEvent.MOUSE_CLICKED, allerAccueil);
+
+		EventHandler <MouseEvent> allerCalculatrice = new EventHandler <MouseEvent> () {
+			@Override
+			public void handle(MouseEvent e) { //marche pas
+				//Redirection vers la page Outils
+				Stage SecondaryStage = new Stage();
+				Calculatrice calculatricePage = new Calculatrice(SecondaryStage);	
+				calculatricePage.afficher(); // Naviguer vers Outils
+			}
+		 };		        
+		calculatrice.addEventHandler(MouseEvent.MOUSE_CLICKED, allerCalculatrice);
+
+		EventHandler <MouseEvent> allerRessources = new EventHandler <MouseEvent> () { //marche pas
+			@Override
+			public void handle(MouseEvent e) {
+				String url = "https://ds.ac-bordeaux.fr/discovery/WAYF?entityID=https%3A%2F%2Fent2d.ac-bordeaux.fr%2Fshibboleth&return=https%3A%2F%2Fent2d.ac-bordeaux.fr%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fent2d.ac-bordeaux.fr%252Fsacoche%252Findex.php%253Fsso%253D2484";
+				getHostServices().showDocument(url);
+			}
+		 };		        
+		pronote.addEventHandler(MouseEvent.MOUSE_CLICKED, allerRessources);
+		
+		EventHandler <MouseEvent> allerProfil = new EventHandler <MouseEvent> () {
+			@Override
+			public void handle(MouseEvent e) {
+				//Redirection vers la page Profil
+				Stage SecondaryStage = new Stage();
+				Profil profilPage = new Profil(SecondaryStage);	
+				profilPage.afficher(); // Naviguer vers Profil
+			}
+		 };		        
+		profil.addEventHandler(MouseEvent.MOUSE_CLICKED, allerProfil);
+		
+		
+		EventHandler <MouseEvent> allerContact = new EventHandler <MouseEvent> () {
+			@Override
+			public void handle(MouseEvent e) {
+				//Redirection vers la page Contact
+				Stage SecondaryStage = new Stage();
+				Contact contactPage = new Contact(SecondaryStage);	
+				contactPage.afficher(); // Naviguer vers Contact
+			}
+		 };		        
+		profil.addEventHandler(MouseEvent.MOUSE_CLICKED, allerContact);
 		
 		//Page de textes
 		VBox grandVBox = new VBox();
@@ -137,6 +195,19 @@ public class CahierTexte extends Application{
 		seanceLine2.getChildren().addAll(exercice9, correctionExercice9);
 		
 		Hyperlink consigneBelleFigure = new Hyperlink("Consignes pour la construction de belles figure de géométrie.");
+		EventHandler <MouseEvent> allerBelleFigure = new EventHandler <MouseEvent> () {
+			@Override
+			public void handle(MouseEvent e) {
+				//Redirection vers la page Belle figure
+				Stage ThirdyStage = new Stage();
+				Figure belleFigure = new Figure(ThirdyStage);	
+				belleFigure.afficher(); // Naviguer vers Accueil
+			}
+		 };		        
+		 consigneBelleFigure.addEventHandler(MouseEvent.MOUSE_CLICKED, allerBelleFigure);
+
+		
+		
 		Hyperlink debutConstruction = new Hyperlink("Début d'une construction."); // a faire : renvoie vers la page "belles figures de géométrie"		
 		EventHandler <MouseEvent> g = new EventHandler <>() {
 			@Override 
