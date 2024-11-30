@@ -8,15 +8,10 @@
 }
 
 .menu-button:hover {
-    -fx-background-color: #2233AA;
-}
-
-.menu-button > .label:hover {
-    -fx-text-fill: #F5F5F5; 
+    -fx-background-color: #D9D9D9;
 }
 
 .menu-item {
-    -fx-text-fill: #2233AA;        /* Couleur du texte des MenuItems */
     -fx-background-color: #F5F5F5; /* Couleur de fond des MenuItems */
 }
 
@@ -28,6 +23,34 @@
 }
 
 .button:hover {
-    -fx-text-fill: #F5F5F5;
-	-fx-background-color: #2233AA; 
+	-fx-background-color: #D9D9D9; 
+}
+
+.titled-pane { /*sélecteur de l'ensemble de titlePane*/
+
+	-fx-border-radius: 10;/*Définit le rayon des coins pour la bordure*/
+	-fx-background-radius: 10; /* Rayon de fond pour correspondre aux coins arrondis*/
+
+}
+
+.titled-pane > .title { /*Sélecteur du titre de titledPane*/
+	-fx-border-color: #Ff0000;
+	-fx-border-radius: 10 10 0 0;
+	-fx-background-radius: 10 10 0 0;
+
+
+}
+
+.titled-pane > .content{/*Sélecteur du contenu de titledPane*/
+	-fx-border-color: #2233AA;
+	-fx-border-radius: 0 0 10 10;
+	-fx-background-radius: 10 10 0 0;
+}
+
+.check-box:selected { /*case*/
+    -fx-mark-color: #Ff0000; /* Couleur de la coche */
+}
+
+.check-box > .box {
+	-fx-border-color: #Ff0000;
 }
