@@ -1,0 +1,30 @@
+/* styles.css */
+.toggle-button {
+    -fx-background-color: #F5F5F5;
+    -fx-border-radius: 5px;       /* Coins arrondis */
+    -fx-border-width: 2px;        /* Épaisseur de la bordure */
+    -fx-border-color: #2233AA;    /* Couleur de la bordure */
+}
+
+/* Lorsque le ToggleButton est sélectionné (appuyé) */
+.toggle-button:selected {
+    -fx-background-color: #D9D9D9; /* Couleur de fond verte lorsqu'il est sélectionné */
+    -fx-border-color: #2233AA;     /* Couleur de la bordure verte lorsqu'il est sélectionné */
+}
+
+/* Apparence générale du ToggleButton lorsqu'il est pressé */
+.toggle-button:pressed {
+    -fx-background-color: #D9D9D9; /* Couleur de fond orange lorsqu'il est pressé */
+    -fx-border-color: #2233AA	;     /* Couleur de la bordure orange lorsqu'il est pressé */
+}
+
+#ValidationButton{
+	-fx-background-color: #F5F5F5;
+	-fx-border-width: 5px;
+	
+}
+
+#ValidationButton:hover{
+	-fx-text-fill: #F5F5F5;
+	-fx-background-color: #D9D9D9; 
+}
