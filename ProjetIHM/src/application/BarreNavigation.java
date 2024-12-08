@@ -1,5 +1,6 @@
 package application;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -53,10 +54,13 @@ public class BarreNavigation extends Application{ // Barre de menu
 		ImageView imContact = new ImageView (new Image (getClass().getResourceAsStream("/Photo/contact.png")));
 		imContact.setFitWidth(20);
 		imContact.setFitHeight(20);
-		Button contact = new Button("Contact", imContact); // renvoie vers la page de contact
-		hbox.setMargin(contact, new Insets(20, 0, 0, 0));
+		MenuButton contact = new MenuButton("Contact", imContact); // renvoie vers la page de contact
+		
 		contact.setPrefSize(130, 50);
-
+		MenuItem prof = new MenuItem("Contact par courriel : mr.crespin@profmath.fr");
+		contact.getItems().add(prof);
+		
+		hbox.setMargin(contact, new Insets(20, 0, 0, 0));
 		hbox.getChildren().addAll(imLogo,spacer, accueil, outil, ressource, profil, contact);
 			
 		EventHandler <MouseEvent> allerAccueil = new EventHandler <MouseEvent> () {
@@ -70,25 +74,22 @@ public class BarreNavigation extends Application{ // Barre de menu
 			};		        
 		accueil.addEventHandler(MouseEvent.MOUSE_CLICKED, allerAccueil);
 
-		EventHandler <MouseEvent> allerCalculatrice = new EventHandler <MouseEvent> () {
-			@Override
-			public void handle(MouseEvent e) { //marche pas
-				//Redirection vers la page Outils
+		calculatrice.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	//Redirection vers la page Outils
 				Stage SecondaryStage = new Stage();
 				Calculatrice calculatricePage = new Calculatrice(SecondaryStage);	
-				calculatricePage.afficher(); // Naviguer vers Outils
+				calculatricePage.afficher(); // Naviguer vers Outils           
 			}
-			};		        
-		calculatrice.addEventHandler(MouseEvent.MOUSE_CLICKED, allerCalculatrice);
+        });
 
-		EventHandler <MouseEvent> allerRessources = new EventHandler <MouseEvent> () { //marche pas
-			@Override
-			public void handle(MouseEvent e) {
-				String url = "https://ds.ac-bordeaux.fr/discovery/WAYF?entityID=https%3A%2F%2Fent2d.ac-bordeaux.fr%2Fshibboleth&return=https%3A%2F%2Fent2d.ac-bordeaux.fr%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fent2d.ac-bordeaux.fr%252Fsacoche%252Findex.php%253Fsso%253D2484";
-				getHostServices().showDocument(url);
-			}
-			};		        
-		pronote.addEventHandler(MouseEvent.MOUSE_CLICKED, allerRessources);
+		pronote.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	String url = "https://ds.ac-bordeaux.fr/discovery/WAYF?entityID=https%3A%2F%2Fent2d.ac-bordeaux.fr%2Fshibboleth&return=https%3A%2F%2Fent2d.ac-bordeaux.fr%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dhttps%253A%252F%252Fent2d.ac-bordeaux.fr%252Fsacoche%252Findex.php%253Fsso%253D2484";
+				getHostServices().showDocument(url);            }
+        });
 			
 		EventHandler <MouseEvent> allerProfil = new EventHandler <MouseEvent> () {
 			@Override
@@ -100,17 +101,7 @@ public class BarreNavigation extends Application{ // Barre de menu
 			}
 		};		        
 		profil.addEventHandler(MouseEvent.MOUSE_CLICKED, allerProfil);
-			
-		EventHandler <MouseEvent> allerContact = new EventHandler <MouseEvent> () {
-			@Override
-			public void handle(MouseEvent e) {
-				//Redirection vers la page Contact
-				Stage SecondaryStage = new Stage();
-				Contact contactPage = new Contact(SecondaryStage);	
-				contactPage.afficher(); // Naviguer vers Contact
-			}
-		};		        
-		profil.addEventHandler(MouseEvent.MOUSE_CLICKED, allerContact);
+		  
 	}
 	@Override
 	public void start(Stage primaryStage) {
