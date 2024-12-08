@@ -1,0 +1,16 @@
+.label:hover {
+    -fx-text-fill: #3355CC;
+    -fx-underline: true;
+}
+
+.hbox {
+    -fx-spacing: 170;
+    -fx-alignment: center;
+}
+
+.vbox > .label:hover {
+    -fx-text-fill: #D9D9D9;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
