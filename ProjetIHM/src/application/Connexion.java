@@ -5,14 +5,20 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -20,23 +26,85 @@ import javafx.stage.Stage;
 public class Connexion extends Application {
     
     public void start(Stage primaryStage) {
-    	VBox root = new VBox(10);
-    	root.setPadding(new Insets(20));
+    	
+    	BorderPane conn = new BorderPane();
+    	// Barre de navigation
+        HBox hbox = new HBox(10);
+        conn.setTop(hbox);
+        
+        hbox.setPadding(new Insets(10,20,10,20));
+        hbox.setStyle("-fx-background-color: #F5F5F5;");
+
+        ImageView imLogo = new ImageView(new Image(getClass().getResourceAsStream("/Photo/Logo.png")));
+        imLogo.setFitHeight(50);
+        imLogo.setFitWidth(150);
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        Button accueil = new Button("Accueil");
+        accueil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        HBox.setMargin(accueil, new Insets(20, 0, 0, 0));
+        accueil.setPrefSize(100, 40);
+
+        MenuButton ressource = new MenuButton("Ressources élèves");
+        ressource.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        HBox.setMargin(ressource, new Insets(20, 0, 0, 0));
+        ressource.setPrefSize(150, 30);
+
+        MenuButton outil = new MenuButton("Outils");
+        outil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        HBox.setMargin(outil, new Insets(20, 0, 0, 0));
+        outil.setPrefSize(100, 30);
+
+        Button profil = new Button("Profil");
+        HBox.setMargin(profil, new Insets(20, 0, 0, 0));
+        profil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        profil.setPrefSize(100, 30);
+
+        ImageView imContact = new ImageView(new Image(getClass().getResourceAsStream("/Photo/contact.png")));
+        imContact.setFitWidth(20);
+        imContact.setFitHeight(20);
+        Button contact = new Button("Contact", imContact);
+        contact.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        HBox.setMargin(contact, new Insets(20, 0, 0, 0));
+        contact.setPrefSize(100, 30);
+
+        hbox.getChildren().addAll(imLogo, spacer, accueil, ressource, outil, profil, contact);
+    	
+        //contenu : 
+    	VBox root = new VBox(15);
+    	root.setPadding(new Insets(30));
+    	root.setAlignment(Pos.TOP_CENTER);
+    	root.setStyle("-fx-background-color: #F5F5F5;");
     	// inserer une image (celle sur canva ) 
-    	Image imageConn = new Image(getClass().getResourceAsStream("/images/logoConnexion.png"));
+    	Image imageConn = new Image(getClass().getResourceAsStream("/Photo/LogoT.png"));
     	ImageView image_connexion = new ImageView(imageConn);
-    	image_connexion.setFitWidth(80);
+    	image_connexion.setFitWidth(240);
     	image_connexion.setPreserveRatio(true);
     	
         Label titre = new Label("Se connecter");
+        titre.setFont(Font.font("Calibri",24));
         titre.setTextAlignment(TextAlignment.CENTER);
+        titre.setStyle("-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+
+        
         Label sous_titre = new Label ("Connectez-vous pour accéder à vos cours, ressources.");
+        sous_titre.setFont(Font.font("Calibri", 14));
         sous_titre.setTextAlignment(TextAlignment.CENTER);
+        
+        
         Label email = new Label ("Email");
+        email.setFont(Font.font("Calibri", 12));
+        email.setStyle("-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
         TextField zonetext = new TextField();
         zonetext.setPromptText("exemple@exemple.com");
         
+        
         Label mot_de_passe =   new Label ("Mot de passe");
+        mot_de_passe.setFont(Font.font("Calibri", 12));
+        mot_de_passe.setStyle("-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         PasswordField mdp = new PasswordField();
         
         Button se_connecter = new Button("Se connecter");
@@ -59,9 +127,12 @@ public class Connexion extends Application {
         		}
         	}
         });
+        //avoir un petit espace entre ma barre de nav et le contenu 
+        Region espace = new Region();
+        espace.setPrefHeight(50);
         
-        root.getChildren().addAll(image_connexion,titre,sous_titre,email,zonetext,mot_de_passe ,mdp,se_connecter);
-        Scene scene = new Scene(root,400,500);
+        root.getChildren().addAll(hbox,espace,image_connexion,titre,sous_titre,email,zonetext,mot_de_passe ,mdp,se_connecter);
+        Scene scene = new Scene(root,900,800);
         primaryStage.setTitle("Connexion");
         primaryStage.setScene(scene);
         primaryStage.show();
