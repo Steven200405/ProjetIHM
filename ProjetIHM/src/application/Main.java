@@ -6,9 +6,16 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        NavigationControleur cahierTexte = new NavigationControleur(primaryStage);
-        cahierTexte.afficher(); // Démarrer avec Cahier de texte
-        
+    	try {
+            primaryStage.setTitle("Cahier de textes");
+            new CahierTexte(primaryStage);
+            primaryStage.show();
+			
+
+    	} catch (Exception e) {
+    			e.printStackTrace();
+    	}
+
     }
 
     public static void main(String[] args) {
