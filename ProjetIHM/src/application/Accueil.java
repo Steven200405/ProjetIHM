@@ -19,46 +19,50 @@ public class Accueil extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-    	
-    	
-        // Barre de navigation
+      
         BorderPane root = new BorderPane();
+        // Barre de navigation
         HBox hbox = new HBox(10);
+        hbox.setPadding(new Insets(10));
         root.setTop(hbox);
-        
+
         ImageView imLogo = new ImageView(new Image(getClass().getResourceAsStream("/Photo/Logo.png")));
-        imLogo.setFitHeight(90);
+        imLogo.setFitHeight(50);
         imLogo.setFitWidth(200);
 
         Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS); 
+        HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        Button accueil = new Button("Accueil");        
+        Button accueil = new Button("Accueil");
+        accueil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         HBox.setMargin(accueil, new Insets(20, 0, 0, 0));
-        accueil.setPrefSize(130, 50);
+        accueil.setPrefSize(100, 40);
 
         MenuButton ressource = new MenuButton("Ressources élèves");
+        ressource.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         HBox.setMargin(ressource, new Insets(20, 0, 0, 0));
-        ressource.setPrefSize(130, 50);
+        ressource.setPrefSize(150, 40);
 
         MenuButton outil = new MenuButton("Outils");
+        outil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         HBox.setMargin(outil, new Insets(20, 0, 0, 0));
-        outil.setPrefSize(130, 50);
+        outil.setPrefSize(100, 40);
 
         Button profil = new Button("Profil");
         HBox.setMargin(profil, new Insets(20, 0, 0, 0));
-        profil.setPrefSize(130, 50);
+        profil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        profil.setPrefSize(100, 40);
 
         ImageView imContact = new ImageView(new Image(getClass().getResourceAsStream("/Photo/contact.png")));
         imContact.setFitWidth(20);
         imContact.setFitHeight(20);
         Button contact = new Button("Contact", imContact);
+        contact.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         HBox.setMargin(contact, new Insets(20, 0, 0, 0));
-        contact.setPrefSize(130, 50);
+        contact.setPrefSize(100, 40);
 
-        hbox.getChildren().addAll(imLogo, spacer, accueil, outil, ressource, profil, contact);
+        hbox.getChildren().addAll(imLogo, spacer, accueil, ressource, outil, profil, contact);
 
-	
         // Contenu principal
         VBox content = new VBox(20);
         content.setPadding(new Insets(20));
@@ -70,15 +74,15 @@ public class Accueil extends Application {
         coursCol.setAlignment(Pos.CENTER_LEFT);
         Label coursTitle = new Label("Cours");
         coursTitle.setStyle("-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        Label coursItem1 = new Label("cahier de texte");
+        Label coursItem1 = new Label("Cahier de texte");
         coursItem1.setStyle("-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        Label coursItem2 = new Label("calcul mental");
+        Label coursItem2 = new Label("Calcul mental");
         coursItem2.setStyle("-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        Label coursItem3 = new Label("belle figures");
+        Label coursItem3 = new Label("Belle figures");
         coursItem3.setStyle("-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        Label coursItem4 = new Label("géometrie");
+        Label coursItem4 = new Label("Géométrie");
         coursItem4.setStyle("-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        Label coursItem5 = new Label("tableau de numération");
+        Label coursItem5 = new Label("Tableau de numération");
         coursItem5.setStyle("-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         coursCol.getChildren().addAll(coursTitle, coursItem1, coursItem2, coursItem3, coursItem4, coursItem5);
 
@@ -115,6 +119,7 @@ public class Accueil extends Application {
 
         content.getChildren().add(colonnes);
 
+        // Scene configuration
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setTitle("Accueil");
         primaryStage.setScene(scene);
