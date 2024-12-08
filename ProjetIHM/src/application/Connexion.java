@@ -32,51 +32,26 @@ public class Connexion extends Application {
         HBox hbox = new HBox(10);
         conn.setTop(hbox);
         
+        
+        
         hbox.setPadding(new Insets(10,20,10,20));
         hbox.setStyle("-fx-background-color: #F5F5F5;");
 
         ImageView imLogo = new ImageView(new Image(getClass().getResourceAsStream("/Photo/Logo.png")));
         imLogo.setFitHeight(50);
         imLogo.setFitWidth(150);
-
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-
-        Button accueil = new Button("Accueil");
-        accueil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        HBox.setMargin(accueil, new Insets(20, 0, 0, 0));
-        accueil.setPrefSize(100, 40);
-
-        MenuButton ressource = new MenuButton("Ressources élèves");
-        ressource.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        HBox.setMargin(ressource, new Insets(20, 0, 0, 0));
-        ressource.setPrefSize(150, 30);
-
-        MenuButton outil = new MenuButton("Outils");
-        outil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        HBox.setMargin(outil, new Insets(20, 0, 0, 0));
-        outil.setPrefSize(100, 30);
-
-        Button profil = new Button("Profil");
-        HBox.setMargin(profil, new Insets(20, 0, 0, 0));
-        profil.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        profil.setPrefSize(100, 30);
-
-        ImageView imContact = new ImageView(new Image(getClass().getResourceAsStream("/Photo/contact.png")));
-        imContact.setFitWidth(20);
-        imContact.setFitHeight(20);
-        Button contact = new Button("Contact", imContact);
-        contact.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        HBox.setMargin(contact, new Insets(20, 0, 0, 0));
-        contact.setPrefSize(100, 30);
-
-        hbox.getChildren().addAll(imLogo, spacer, accueil, ressource, outil, profil, contact);
+        
+        hbox.getChildren().addAll(imLogo);
     	
+        
         //contenu : 
     	VBox root = new VBox(15);
+    	
     	root.setPadding(new Insets(30));
-    	root.setAlignment(Pos.TOP_CENTER);
+    	root.setAlignment(Pos.CENTER);
     	root.setStyle("-fx-background-color: #F5F5F5;");
+    	
+
     	// inserer une image (celle sur canva ) 
     	Image imageConn = new Image(getClass().getResourceAsStream("/Photo/LogoT.png"));
     	ImageView image_connexion = new ImageView(imageConn);
@@ -100,14 +75,18 @@ public class Connexion extends Application {
         
         TextField zonetext = new TextField();
         zonetext.setPromptText("exemple@exemple.com");
+        zonetext.setMaxWidth(250);  
         
         
         Label mot_de_passe =   new Label ("Mot de passe");
         mot_de_passe.setFont(Font.font("Calibri", 12));
         mot_de_passe.setStyle("-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
         PasswordField mdp = new PasswordField();
+        mdp.setMaxWidth(250);
         
         Button se_connecter = new Button("Se connecter");
+        se_connecter.setStyle("-fx-background-color: #d6d6ce; -fx-text-fill: #2233AA; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px ; -fx-font-family: 'Calibri (MS)';");
         
         se_connecter.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
@@ -127,12 +106,11 @@ public class Connexion extends Application {
         		}
         	}
         });
-        //avoir un petit espace entre ma barre de nav et le contenu 
-        Region espace = new Region();
-        espace.setPrefHeight(50);
         
-        root.getChildren().addAll(hbox,espace,image_connexion,titre,sous_titre,email,zonetext,mot_de_passe ,mdp,se_connecter);
-        Scene scene = new Scene(root,900,800);
+        
+        conn.setCenter(root);
+        root.getChildren().addAll(image_connexion,titre,sous_titre,email,zonetext,mot_de_passe ,mdp,se_connecter);
+        Scene scene = new Scene(conn,900,800);
         primaryStage.setTitle("Connexion");
         primaryStage.setScene(scene);
         primaryStage.show();
