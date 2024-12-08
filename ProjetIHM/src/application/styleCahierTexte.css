@@ -11,9 +11,6 @@
     -fx-background-color: #D9D9D9;
 }
 
-.menu-item {
-    -fx-background-color: #F5F5F5; /* Couleur de fond des MenuItems */
-}
 
 .button {
 	-fx-background-color: #F5F5F5;
@@ -36,8 +33,7 @@
 .titled-pane > .title { /*Sélecteur du titre de titledPane*/
 	-fx-border-color: #Ff0000;
 	-fx-border-radius: 10 10 0 0;
-	-fx-background-radius: 10 10 0 0;
-
+	-fx-background-radius: 10 10 0 0
 
 }
 
