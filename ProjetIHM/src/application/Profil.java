@@ -1,6 +1,9 @@
 package application;
 
+import java.util.Optional;
+
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
@@ -8,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,6 +25,7 @@ import javafx.scene.layout.Region;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Button;
 
 
@@ -80,9 +85,6 @@ public class Profil extends Application{
 		Label nomReel = new Label("Huang");
 		nomReel.setFont(Font.font("Calibri",25));
 		nomReel.setTextFill(Color.web("#2233AA"));
-		HBox ligneNom = new HBox();
-		ligneNom.getChildren().addAll(nom,nomReel);
-		ligneNom.setAlignment(Pos.CENTER_LEFT);
 
 		
 		Label prenom = new Label("Prenom: ");
@@ -91,9 +93,6 @@ public class Profil extends Application{
 		Label prenomReel = new Label("Steven");
 		prenomReel.setFont(Font.font("Calibri",25));
 		prenomReel.setTextFill(Color.web("#2233AA"));
-		HBox lignePrenom = new HBox();
-		lignePrenom.getChildren().addAll(prenom,prenomReel);
-		lignePrenom.setAlignment(Pos.CENTER_LEFT);
 
 		
 		
@@ -119,14 +118,27 @@ public class Profil extends Application{
 		modifImageAffichage4.setFitWidth(20); 
 		modifImageAffichage4.setFitHeight(20);
 
-		
+
 		
 		Button modifDateNais = new Button();
 		modifDateNais.setGraphic(modifImageAffichage);
-		HBox ligneDate = new HBox();
-		ligneDate.getChildren().addAll(dateNais,dateNaisReel,modifDateNais);
-		ligneDate.setAlignment(Pos.CENTER_LEFT);
-
+		modifDateNais.setOnMouseEntered(new EventHandler<MouseEvent>(){
+        	public void handle(MouseEvent event) {
+        		interactionButton(modifDateNais,1.2);
+        	}
+        });
+		modifDateNais.setOnMouseExited(new EventHandler<MouseEvent>(){
+        	public void handle(MouseEvent event) {
+        		interactionButton(modifDateNais,1);
+        	}
+        });
+		modifDateNais.setPadding(new Insets(0,0,0,0));
+		modifDateNais.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+					modifDialog(dateNaisReel,"date de naissance");
+				}
+		});
 		
 		Label email = new Label("Email: ");
 		email.setFont(Font.font("Calibri",FontWeight.BOLD,25));
@@ -137,9 +149,26 @@ public class Profil extends Application{
 		HBox ligneEmail = new HBox();
 		Button modifEmail = new Button();
 		modifEmail.setGraphic(modifImageAffichage2);
+		modifEmail.setOnMouseEntered(new EventHandler<MouseEvent>(){
+        	public void handle(MouseEvent event) {
+        		interactionButton(modifEmail,1.2);
+        	}
+        });
+		modifEmail.setOnMouseExited(new EventHandler<MouseEvent>(){
+        	public void handle(MouseEvent event) {
+        		interactionButton(modifEmail,1);
+        	}
+        });
+		modifEmail.setPadding(new Insets(0,0,0,0));
+		
 		ligneEmail.getChildren().addAll(email,emailReel,modifEmail);
 		ligneEmail.setAlignment(Pos.CENTER_LEFT);
-
+		modifEmail.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+					modifDialog(emailReel,"email");
+				}
+		});
 		
 		Label mdp = new Label("Mdp: ");
 		mdp.setFont(Font.font("Calibri",FontWeight.BOLD,25));
@@ -147,13 +176,45 @@ public class Profil extends Application{
 		Label mdpReel = new Label("********");
 		mdpReel.setFont(Font.font("Calibri",25));
 		mdpReel.setTextFill(Color.web("#2233AA"));
-		HBox ligneMdp = new HBox();
 		Button modifMdp = new Button();
 		modifMdp.setGraphic(modifImageAffichage3);
-		ligneMdp.getChildren().addAll(mdp,mdpReel,modifMdp);
-		ligneMdp.setAlignment(Pos.CENTER_LEFT);
 
+		modifMdp.setOnMouseEntered(new EventHandler<MouseEvent>(){
+        	public void handle(MouseEvent event) {
+        		interactionButton(modifMdp,1.2);
+        	}
+        });
+		modifMdp.setOnMouseExited(new EventHandler<MouseEvent>(){
+        	public void handle(MouseEvent event) {
+        		interactionButton(modifMdp,1);
+        	}
+        });
+		modifMdp.setPadding(new Insets(0,0,0,0));
+		Label mdpMauvais = new Label("Mot de passe incorrecte, veuillez réessayer");
+		mdpMauvais.setOpacity(0);
+		mdpMauvais.setFont(Font.font("Calibri",FontWeight.BOLD, 15));
+		mdpMauvais.setTextFill(Color.web("#2233AA"));
 
+		modifMdp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				TextInputDialog verif = new TextInputDialog();
+				verif.setTitle("Confirmation Mot de Passe");
+				verif.setHeaderText("Confirmation du Mot de Passe");
+				verif.setContentText("Saisissez le mot de passe actuel: ");
+				verif.getDialogPane().setStyle("-fx-font-size: 13; -fx-font-family:Calibri; -fx-font-weight:Bold; -fx-background-color: #F5F5F5");
+				Optional<String> result = verif.showAndWait();
+				if(result.isPresent()) {
+					if(mdpReel.getText().equals(result.get())){
+						mdpMauvais.setOpacity(0);
+						modifDialog(mdpReel,"mot de passe");
+					}
+					else {
+						mdpMauvais.setOpacity(1);
+					}
+				}
+				}
+		});
 		
 		Label statut = new Label("Élève: ");
 		statut.setFont(Font.font("Calibri",FontWeight.BOLD,25));
@@ -161,29 +222,45 @@ public class Profil extends Application{
 		Label statutReel = new Label("Élève");
 		statutReel.setFont(Font.font("Calibri",25));
 		statutReel.setTextFill(Color.web("#2233AA"));
-		HBox ligneStatut = new HBox();
+		
 		Button modifStatut = new Button();
 		modifStatut.setGraphic(modifImageAffichage4);
-		ligneStatut.getChildren().addAll(statut,statutReel,modifStatut);
-		ligneStatut.setAlignment(Pos.CENTER_LEFT);
+		modifStatut.setOnMouseEntered(new EventHandler<MouseEvent>(){
+        	public void handle(MouseEvent event) {
+        		interactionButton(modifStatut,1.2);
+        	}
+        });
+		modifStatut.setOnMouseExited(new EventHandler<MouseEvent>(){
+        	public void handle(MouseEvent event) {
+        		interactionButton(modifStatut,1);
+        	}
+        });
 		
+		modifStatut.setPadding(new Insets(0,0,0,0));
+		modifStatut.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+					modifDialog(statutReel,"statut");
+				}
+		});
 		GridPane grille = new GridPane();
 		grille.add(nom,0, 0,3,1);
 		grille.add(prenom, 0, 1,3,1);
 		grille.add(dateNais,0,2,3,1);
 		grille.add(email,0,3,3,1);
 		grille.add(mdp,0,4,3,1);
-		grille.add(statut,0,5,3,1);
+		grille.add(statut,0,6,3,1);
 		grille.add(nomReel,3, 0,3,1);
 		grille.add(prenomReel, 3, 1,3,1);
 		grille.add(dateNaisReel,3,2,3,1);
 		grille.add(emailReel,3,3,3,1);
 		grille.add(mdpReel,3,4,3,1);
-		grille.add(statutReel,3,5,3,1);
+		grille.add(statutReel,3,6,3,1);
 		grille.add(modifDateNais,7, 2);
 		grille.add(modifEmail, 7, 3);
 		grille.add(modifMdp, 7, 4);
-		grille.add(modifStatut, 7, 5);
+		grille.add(mdpMauvais, 5, 5);
+		grille.add(modifStatut, 7, 6);
 		
 		grille.setHalignment(nom, HPos.RIGHT);	
 		grille.setHalignment(prenom, HPos.RIGHT);		
@@ -209,7 +286,9 @@ public class Profil extends Application{
 		root.setCenter(vbox);
 
 
-		Scene scene=new Scene(root,300,400);
+		Scene scene=new Scene(root,1500,800);
+        scene.getStylesheets().add(getClass().getResource("ProfilCSS.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("BarreNav.css").toExternalForm());
 		primaryStage.setTitle("Page d'accueil");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -217,5 +296,22 @@ public class Profil extends Application{
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	private void interactionButton(Button btn, double nb) {
+		btn.setScaleX(nb);
+		btn.setScaleY(nb);
+	}
+	
+	private void modifDialog(Label contenu, String nom) {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Modification");
+		dialog.setHeaderText("Modification du " + nom);
+		dialog.setContentText("Entrez: "+ nom);
+		dialog.getDialogPane().setStyle("-fx-font-size: 13; -fx-font-family:Calibri; -fx-font-weight:Bold; -fx-background-color: #F5F5F5");
+		Optional<String> result = dialog.showAndWait();
+		if(result.isPresent()) {
+			contenu.setText(result.get());
+		}
 	}
 }
