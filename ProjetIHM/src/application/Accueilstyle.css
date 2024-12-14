@@ -29,7 +29,7 @@
 
 .menu-button {
 	-fx-background-color: #F5F5F5;
-    -fx-font-size: 14px;
+        -fx-font-size: 14px;
 	-fx-border-color: none;
 }
 .menu-button > .label {
