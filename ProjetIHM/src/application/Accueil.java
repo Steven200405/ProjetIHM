@@ -1,5 +1,7 @@
 package application;
+
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -20,42 +23,10 @@ public class Accueil extends Application {
     @Override
     public void start(Stage primaryStage) {
       
-        BorderPane root = new BorderPane();
-        // Barre de navigation
+    	BarreNavigation barreNavigation = new BarreNavigation();
+    	BorderPane root = barreNavigation.getBorderPane();
 
-		
-        HBox barreNav = new HBox();
-
-        ImageView imLogo = new ImageView (new Image (getClass().getResourceAsStream("/Photo/Logo.png")));
-        imLogo.setFitHeight(90);
-        imLogo.setFitWidth(200);
         
-        Region spacer = new Region(); // Region est un conteneur- vide qui peut occuper l'espace horizontal/vertical 
-        barreNav.setHgrow(spacer, Priority.ALWAYS); // setHgrow spécifit comment l'espace sur la ligne va être occupé.
-        
-        Button accueil = new Button("Accueil");        
-        barreNav.setMargin(accueil, new Insets(20, 0, 0, 0));
-        accueil.setPrefSize(130, 50);
-        MenuButton ressource = new MenuButton("Ressources élèves");
-        barreNav.setMargin(ressource, new Insets(20, 0, 0, 0));
-        ressource.setPrefSize(130, 50);
-
-        MenuButton outil = new MenuButton("Outils");
-        barreNav.setMargin(outil, new Insets(20, 0, 0, 0));
-        outil.setPrefSize(130, 50);
-        Button profil = new Button("Profil");
-        barreNav.setMargin(profil, new Insets(20, 0, 0, 0));
-        profil.setPrefSize(130, 50);
-
-        ImageView imContact = new ImageView (new Image (getClass().getResourceAsStream("/Photo/contact.png")));
-        imContact.setFitWidth(20);
-        imContact.setFitHeight(20);
-        Button contact = new Button("Contact", imContact);
-        barreNav.setMargin(contact, new Insets(20, 0, 0, 0));
-        contact.setPrefSize(130, 50);
-        
-        barreNav.getChildren().addAll(imLogo,spacer, accueil, outil, ressource, profil, contact);
-        root.setTop(barreNav);
         // Contenu principal
         VBox content = new VBox(20);
         content.setPadding(new Insets(20));
@@ -69,15 +40,78 @@ public class Accueil extends Application {
         coursTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         VBox.setMargin(coursTitle, new Insets(0, 0, 20, 0));
         Label coursItem1 = new Label("Cahier de texte");
+        
+        //Evenement : 
+        EventHandler<MouseEvent> cahierDeTexte = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		CahierTexte cahiertextePage = new CahierTexte(primaryStage);
+        		cahiertextePage.afficher();
+        	}
+        };
+        
+        coursItem1.addEventHandler(MouseEvent.MOUSE_CLICKED , cahierDeTexte);
+       
         coursItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         Label coursItem2 = new Label("Calcul mental");
         coursItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> calculMental = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		CalculMental calculmentalPage = new CalculMental(primaryStage);
+        		calculmentalPage.afficher();
+        	}
+        };
+        coursItem2.addEventHandler(MouseEvent.MOUSE_CLICKED , calculMental);
+
+
+        
+        
+        
         Label coursItem3 = new Label("Belle figures");
         coursItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> figureGeometrique = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		Figure figureGeometriquePage = new Figure(primaryStage);
+        		figureGeometriquePage.afficher();
+        	}
+        };
+        coursItem3.addEventHandler(MouseEvent.MOUSE_CLICKED , figureGeometrique);
+        
+        
+        
         Label coursItem4 = new Label("Géométrie");
         coursItem4.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> geometrie = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		Geometrie geometriePage = new Geometrie(primaryStage);
+        		geometriePage.afficher();
+        	}
+        };
+        coursItem4.addEventHandler(MouseEvent.MOUSE_CLICKED , geometrie);
+        
         Label coursItem5 = new Label("Tableau de numération");
         coursItem5.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+        //Evenement : 
+            EventHandler<MouseEvent> tableauNumeration = new EventHandler<MouseEvent>() {
+            	@Override
+            	public void handle(MouseEvent e) {
+            		TableauNumeration numerationPage = new TableauNumeration(primaryStage);
+            		numerationPage.afficher();
+            	}
+            };
+            coursItem5.addEventHandler(MouseEvent.MOUSE_CLICKED , tableauNumeration);
+        
+        
         coursCol.getChildren().addAll(coursTitle, coursItem1, coursItem2, coursItem3, coursItem4, coursItem5);
 
         // Colonne pour les Jeux
@@ -87,11 +121,46 @@ public class Accueil extends Application {
         VBox.setMargin(jeuxTitle, new Insets(0, 0, 20, 0));
         jeuxTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         Label jeuxItem1 = new Label("Apprentissage du jeu d’échecs");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> echecs = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		Echecs echecsPage = new Echecs (primaryStage);
+        		echecsPage.afficher();
+        	}
+        };
+        jeuxItem1.addEventHandler(MouseEvent.MOUSE_CLICKED , echecs);
+        
+        
         jeuxItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         Label jeuxItem2 = new Label("Cartes à jouer");
         jeuxItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+        
+      //Evenement : 
+        EventHandler<MouseEvent> cartes = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		Carte cartesPage = new Carte (primaryStage);
+        		cartesPage.afficher();
+        	}
+        };
+        jeuxItem2.addEventHandler(MouseEvent.MOUSE_CLICKED , cartes);
+        
         Label jeuxItem3 = new Label("Paper Toys");
         jeuxItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> paperToys = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		PaperToys paperToysPage = new PaperToys (primaryStage);
+        		paperToysPage.afficher();
+        	}
+        };
+        jeuxItem3.addEventHandler(MouseEvent.MOUSE_CLICKED , paperToys);
+        
         jeuxCol.getChildren().addAll(jeuxTitle, jeuxItem1, jeuxItem2, jeuxItem3);
 
         // Colonne pour les Ressources externes
@@ -102,12 +171,61 @@ public class Accueil extends Application {
         ressourcesTitle.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         Label ressourcesItem1 = new Label("Portail d’informations mathématiques");
         ressourcesItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        Label ressourcesItem2 = new Label("Calcul Mental");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> ressourcesExternes = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		RessourcesExternes ressourcesExternesPage = new RessourcesExternes (primaryStage);
+        		ressourcesExternesPage.afficher();
+        	}
+        };
+        ressourcesItem1.addEventHandler(MouseEvent.MOUSE_CLICKED , ressourcesExternes);
+        
+        
+        
+        Label ressourcesItem2 = new Label("Calculatrice");
         ressourcesItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> calculatrice = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		Calculatrice calculatricePage = new Calculatrice (primaryStage);
+        		calculatricePage.afficher();
+        	}
+        };
+        ressourcesItem2.addEventHandler(MouseEvent.MOUSE_CLICKED , calculatrice);
+        
+        
         Label ressourcesItem3 = new Label("Algoblocs");
         ressourcesItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> algoblocs = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		AlgoBlocs algoblocsPage = new AlgoBlocs (primaryStage);
+        		algoblocsPage.afficher();
+        	}
+        };
+        ressourcesItem3.addEventHandler(MouseEvent.MOUSE_CLICKED , algoblocs);
+        
+        
+        
         Label ressourcesItem4 = new Label("LaboMEP");
         ressourcesItem4.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+      //Evenement : 
+        EventHandler<MouseEvent> laboMEP = new EventHandler<MouseEvent>() {
+        	@Override
+        	public void handle(MouseEvent e) {
+        		LaboMEP laboMEPPage = new LaboMEP (primaryStage);
+        		laboMEPPage.afficher();
+        	}
+        };
+        ressourcesItem4.addEventHandler(MouseEvent.MOUSE_CLICKED , laboMEP);
+        
         ressourcesCol.getChildren().addAll(ressourcesTitle, ressourcesItem1, ressourcesItem2, ressourcesItem3, ressourcesItem4);
 
         HBox colonnes = new HBox(170, coursCol, jeuxCol, ressourcesCol);
