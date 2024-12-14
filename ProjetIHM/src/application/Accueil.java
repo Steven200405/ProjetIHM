@@ -31,12 +31,12 @@ public class Accueil extends Application {
         // Contenu principal
         VBox content = new VBox(20);
         content.setPadding(new Insets(20));
-        content.setAlignment(Pos.CENTER);
+        content.setAlignment(Pos.CENTER); //on positione les éléments au centre 
         root.setCenter(content);
 
         // Colonne pour les Cours
         VBox coursCol = new VBox(10);
-        coursCol.setAlignment(Pos.TOP_LEFT); //on positione les éléments au centre 
+        coursCol.setAlignment(Pos.TOP_LEFT); //on positione les éléments a gauche
         Label coursTitle = new Label("Cours");
         coursTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         
