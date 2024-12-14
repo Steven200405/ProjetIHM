@@ -23,6 +23,7 @@ public class Accueil extends Application {
     @Override
     public void start(Stage primaryStage) {
       
+    	//héritage de la barre de navigation 
     	BarreNavigation barreNavigation = new BarreNavigation();
     	BorderPane root = barreNavigation.getBorderPane();
 
@@ -35,11 +36,15 @@ public class Accueil extends Application {
 
         // Colonne pour les Cours
         VBox coursCol = new VBox(10);
-        coursCol.setAlignment(Pos.TOP_LEFT);
+        coursCol.setAlignment(Pos.TOP_LEFT); //on positione les éléments au centre 
         Label coursTitle = new Label("Cours");
         coursTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+     // definir un id "pas de css" afin d'exclure le coursTitle du css
         coursTitle.setId("pasdeCss");
         VBox.setMargin(coursTitle, new Insets(0, 0, 20, 0));
+        
+        // Ajouts des Items avec les Evénements 
         Label coursItem1 = new Label("Cahier de texte");
         
         //Evenement : 
@@ -67,10 +72,6 @@ public class Accueil extends Application {
         };
         coursItem2.addEventHandler(MouseEvent.MOUSE_CLICKED , calculMental);
 
-
-        
-        
-        
         Label coursItem3 = new Label("Belle figures");
         coursItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         
@@ -84,8 +85,7 @@ public class Accueil extends Application {
         };
         coursItem3.addEventHandler(MouseEvent.MOUSE_CLICKED , figureGeometrique);
         
-        
-        
+
         Label coursItem4 = new Label("Géométrie");
         coursItem4.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         
@@ -112,7 +112,7 @@ public class Accueil extends Application {
             };
             coursItem5.addEventHandler(MouseEvent.MOUSE_CLICKED , tableauNumeration);
         
-        
+        // Ajouts des elements à la colonne Cours
         coursCol.getChildren().addAll(coursTitle, coursItem1, coursItem2, coursItem3, coursItem4, coursItem5);
 
         // Colonne pour les Jeux
@@ -121,7 +121,11 @@ public class Accueil extends Application {
         Label jeuxTitle = new Label("Jeux");
         VBox.setMargin(jeuxTitle, new Insets(0, 0, 20, 0));
         jeuxTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+        // definir un id "pas de css" afin d'exclure le jeuxTitle du css
         jeuxTitle.setId("pasdeCss");
+        
+        // Ajout des Items avec les Evénements 
         Label jeuxItem1 = new Label("Apprentissage du jeu d’échecs");
         
       //Evenement : 
@@ -163,15 +167,21 @@ public class Accueil extends Application {
         };
         jeuxItem3.addEventHandler(MouseEvent.MOUSE_CLICKED , paperToys);
         
+        // Ajouts des elements à la colonne jeux
         jeuxCol.getChildren().addAll(jeuxTitle, jeuxItem1, jeuxItem2, jeuxItem3);
 
+        
         // Colonne pour les Ressources externes
         VBox ressourcesCol = new VBox(10);
         ressourcesCol.setAlignment(Pos.TOP_LEFT);
         Label ressourcesTitle = new Label("Ressources externes");
         VBox.setMargin(ressourcesTitle, new Insets(0, 0, 20, 0));
         ressourcesTitle.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        
+        // definir un id "pas de css" afin d'exclure le ressourcesTitle du css
         ressourcesTitle.setId("pasdeCss");
+        
+       // Ajout des Items avec les Evénements 
         Label ressourcesItem1 = new Label("Portail d’informations mathématiques");
         ressourcesItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         
@@ -229,6 +239,7 @@ public class Accueil extends Application {
         };
         ressourcesItem4.addEventHandler(MouseEvent.MOUSE_CLICKED , laboMEP);
         
+        // Ajouts des elements à la colonne ressources
         ressourcesCol.getChildren().addAll(ressourcesTitle, ressourcesItem1, ressourcesItem2, ressourcesItem3, ressourcesItem4);
 
         HBox colonnes = new HBox(170, coursCol, jeuxCol, ressourcesCol);
@@ -242,9 +253,9 @@ public class Accueil extends Application {
         
         content.getChildren().add(colonnes);
 
-        // Scene configuration
+        // configuration de scene
         Scene scene = new Scene(root, 900, 600);
-        //scene.getStylesheets().add(getClass().getResource("styleCahierTexte.css").toExternalForm());
+        // ajout du Css pour personnaliser notre interface
         scene.getStylesheets().add(getClass().getResource("Accueilstyle.css").toExternalForm());
         primaryStage.setTitle("Accueil");
         primaryStage.setScene(scene);
