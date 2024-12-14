@@ -138,7 +138,7 @@ public class Connexion extends Application {
 
         // configuration de scene
         Scene scene = new Scene(conn, 900, 800);
-        scene.getStylesheets().add(getClass().getResource("styleCahierTexte.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("connexionCss.css").toExternalForm());
         primaryStage.setTitle("Connexion");
         primaryStage.setScene(scene);
         primaryStage.show();
