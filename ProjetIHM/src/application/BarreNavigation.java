@@ -17,50 +17,51 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class BarreNavigation extends Application{ // Barre de menu
+public class BarreNavigation extends Application{ // Barre de navigation
 	protected BorderPane root = new BorderPane();  // on reprend le conteneur dans chaque page du site
 	
 	public BarreNavigation() {	
-		
+		// Création d'un Hbox pour mettre tous les boutons sur une même ligne
 		HBox hbox = new HBox();
-		root.setTop(hbox);
+		root.setTop(hbox); // Ajout du HBox dans la partie haute de BorderPane
 		ImageView imLogo = new ImageView (new Image (getClass().getResourceAsStream("/Photo/Logo.png")));
 		imLogo.setFitHeight(90);
 		imLogo.setFitWidth(200);
 			
 		Region spacer = new Region(); // Region est un conteneur vide qui peut occuper l'espace horizontal/vertical 
-		hbox.setHgrow(spacer, Priority.ALWAYS); // setHgrow spécifit comment l'espace sur la ligne va être occupé.
-			
-		Button accueil = new Button("Accueil"); // a finir: remplir la page "Accueil"
+		hbox.setHgrow(spacer, Priority.ALWAYS); // setHgrow spécifie comment l'espace sur la ligne va être occupé: Le nœud utilisera tout l'espace horizontal supplémentaire disponible.
+		
+		// Création des boutons
+		Button accueil = new Button("Accueil");
 		hbox.setMargin(accueil, new Insets(20, 0, 0, 0));
-		accueil.setPrefSize(130, 50);
+		accueil.setPrefSize(130, 50); // on définit la dimension à allouer pour le bouton : largeur, hauteur
 			
-		MenuButton ressource = new MenuButton("Ressources élèves"); // a finir: mettre les MenuItem présents dans le ressources élèves.
+		MenuButton ressource = new MenuButton("Ressources élèves");
 		hbox.setMargin(ressource, new Insets(20, 0, 0, 0));
 		ressource.setPrefSize(130, 50);
 		MenuItem pronote = new MenuItem("Pronote");
 		ressource.getItems().add(pronote);
 
-		MenuButton outil = new MenuButton("Outils"); // a finir: mettre les MenuItem présents dans le bouton outils. Comme la page calculatrice et d'autres pages web.
+		MenuButton outil = new MenuButton("Outils");
 		hbox.setMargin(outil, new Insets(20, 0, 0, 0));
 		MenuItem calculatrice = new MenuItem("Calculatrice");
 		outil.setPrefSize(130, 50);
 		outil.getItems().add(calculatrice);
 			
-		Button profil = new Button("Profil"); // a finir: remplir la page "Profil"
+		Button profil = new Button("Profil");
 		hbox.setMargin(profil, new Insets(20, 0, 0, 0));
 		profil.setPrefSize(130, 50);
 
 		ImageView imContact = new ImageView (new Image (getClass().getResourceAsStream("/Photo/contact.png")));
 		imContact.setFitWidth(20);
 		imContact.setFitHeight(20);
-		MenuButton contact = new MenuButton("Contact", imContact); // renvoie vers la page de contact
-		
+		MenuButton contact = new MenuButton("Contact", imContact);
 		contact.setPrefSize(130, 50);
 		MenuItem prof = new MenuItem("Contact par courriel : mr.crespin@profmath.fr");
 		contact.getItems().add(prof);
-		
 		hbox.setMargin(contact, new Insets(20, 0, 0, 0));
+		
+		// Ajoute tous les boutons au HBox
 		hbox.getChildren().addAll(imLogo,spacer, accueil, outil, ressource, profil, contact);
 			
 		EventHandler <MouseEvent> allerAccueil = new EventHandler <MouseEvent> () {
