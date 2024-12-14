@@ -76,7 +76,7 @@ public class Profil extends Application{
         barreNav.getChildren().addAll(imLogo,spacer, accueil, outil, ressource, profil, contact);
         root.setTop(barreNav);
 
-        // Contenu de la page Profil
+        // Contenu principal de la page Profil
         Label titre = new Label("Profil");
         titre.setFont(Font.font("Calibri",FontWeight.BOLD,75));
         titre.setTextFill(Color.web("#2233AA"));
@@ -87,7 +87,7 @@ public class Profil extends Application{
 		Affichage.setFitHeight(350);
 		Affichage.setFitWidth(250);
 		
-		//Création des Label, avec légende et données réels, et décoration 
+		//Création des Label, avec légende et données réelles associées, et décoration 
 		Label nom = new Label("Nom: ");
 		nom.setFont(Font.font("Calibri",FontWeight.BOLD,25));
 		nom.setTextFill(Color.web("#2233AA"));
@@ -126,24 +126,27 @@ public class Profil extends Application{
 		modifImageAffichage4.setFitWidth(20); 
 		modifImageAffichage4.setFitHeight(20);
 		
-		// Création d'un bouton qu'on lui associe l'image crée et on lui ajoute un événement
+		// Création d'un bouton dont on lui associe l'image crée et on lui ajoute des événements
 		Button modifDateNais = new Button();
 		modifDateNais.setGraphic(modifImageAffichage);
+		// On associe au bouton un événement qui agrandi la taille du bouton
 		modifDateNais.setOnMouseEntered(new EventHandler<MouseEvent>(){
-        	public void handle(MouseEvent event) { // ?
+        	public void handle(MouseEvent event) { 
         		interactionButton(modifDateNais,1.2);
         	}
         });
+		// Ajoute un autre événement: Quand la souris sort de l'image, la taille de l'image rétréci
 		modifDateNais.setOnMouseExited(new EventHandler<MouseEvent>(){
         	public void handle(MouseEvent event) {
         		interactionButton(modifDateNais,1);
         	}
         });
 		modifDateNais.setPadding(new Insets(0,0,0,0));
+		// Ajoute un autre événement: si le bouton est cliqué, ...
 		modifDateNais.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-					modifDialog(dateNaisReel,"date de naissance");
+					modifDialog(dateNaisReel,"date de naissance"); // appelle la méthode modifDialog pour modifier les données
 				}
 		});
 		
@@ -153,14 +156,16 @@ public class Profil extends Application{
 		Label emailReel = new Label("huangsteven2004@gmail.com");
 		emailReel.setFont(Font.font("Calibri",25));
 		emailReel.setTextFill(Color.web("#2233AA"));
-		HBox ligneEmail = new HBox();
+		HBox ligneEmail = new HBox(); 
 		Button modifEmail = new Button();
 		modifEmail.setGraphic(modifImageAffichage2);
+		// Association d'un événement qui agrandi le taille de l'image au bouton modifEmail quand la souris entre dans l'image
 		modifEmail.setOnMouseEntered(new EventHandler<MouseEvent>(){
         	public void handle(MouseEvent event) {
         		interactionButton(modifEmail,1.2);
         	}
         });
+		// Ajoute un événement qui dézoom l'image quand la souris sort de l'image
 		modifEmail.setOnMouseExited(new EventHandler<MouseEvent>(){
         	public void handle(MouseEvent event) {
         		interactionButton(modifEmail,1);
@@ -168,12 +173,12 @@ public class Profil extends Application{
         });
 		modifEmail.setPadding(new Insets(0,0,0,0));
 		
-		ligneEmail.getChildren().addAll(email,emailReel,modifEmail);
+		ligneEmail.getChildren().addAll(email,emailReel,modifEmail); // On met sur une ligne le label, la donnée et l'image asscociés à l'email
 		ligneEmail.setAlignment(Pos.CENTER_LEFT);
 		modifEmail.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-					modifDialog(emailReel,"email");
+					modifDialog(emailReel,"email"); // appelle la méthode modifDialog pour modifier la donnée email
 				}
 		});
 		
@@ -185,12 +190,13 @@ public class Profil extends Application{
 		mdpReel.setTextFill(Color.web("#2233AA"));
 		Button modifMdp = new Button();
 		modifMdp.setGraphic(modifImageAffichage3);
-
+/		// Association d'un événement qui agrandi le taille de l'image au bouton modifMdp quand la souris entre dans l'image
 		modifMdp.setOnMouseEntered(new EventHandler<MouseEvent>(){
         	public void handle(MouseEvent event) {
         		interactionButton(modifMdp,1.2);
         	}
         });
+		// Ajoute un événement qui dézoom l'image quand la souris sort de l'image
 		modifMdp.setOnMouseExited(new EventHandler<MouseEvent>(){
         	public void handle(MouseEvent event) {
         		interactionButton(modifMdp,1);
@@ -201,10 +207,10 @@ public class Profil extends Application{
 		mdpMauvais.setOpacity(0);
 		mdpMauvais.setFont(Font.font("Calibri",FontWeight.BOLD, 15));
 		mdpMauvais.setTextFill(Color.web("#2233AA"));
-
+		// Ajoute un événement au clic de l'image associé au mot de passe
 		modifMdp.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
-			public void handle(MouseEvent event) {
+			public void handle(MouseEvent event) { // ??
 				TextInputDialog verif = new TextInputDialog();
 				verif.setTitle("Confirmation Mot de Passe");
 				verif.setHeaderText("Confirmation du Mot de Passe");
@@ -214,7 +220,7 @@ public class Profil extends Application{
 				if(result.isPresent()) {
 					if(mdpReel.getText().equals(result.get())){
 						mdpMauvais.setOpacity(0);
-						modifDialog(mdpReel,"mot de passe");
+						modifDialog(mdpReel,"mot de passe"); // appelle la méthode modifDialog pour modifier la donnée dans mot de passe
 					}
 					else {
 						mdpMauvais.setOpacity(1);
@@ -232,11 +238,13 @@ public class Profil extends Application{
 		
 		Button modifStatut = new Button();
 		modifStatut.setGraphic(modifImageAffichage4);
+		// Associe au bouton modifStatut l'évenement d'effet de zoom
 		modifStatut.setOnMouseEntered(new EventHandler<MouseEvent>(){
         	public void handle(MouseEvent event) {
         		interactionButton(modifStatut,1.2);
         	}
         });
+		// Associe au bouton modifStatut l'évenement d'effet de dézoom
 		modifStatut.setOnMouseExited(new EventHandler<MouseEvent>(){
         	public void handle(MouseEvent event) {
         		interactionButton(modifStatut,1);
@@ -244,12 +252,14 @@ public class Profil extends Application{
         });
 		
 		modifStatut.setPadding(new Insets(0,0,0,0));
+		// / Associe au bouton modifStatut l'évenement: modifier la donnée associé à Statut
 		modifStatut.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-					modifDialog(statutReel,"statut");
+					modifDialog(statutReel,"statut"); //appelle la méthode modifDialog pour modifier la donnée dans statut
 				}
 		});
+		// Création d'un GridPane afin de positionner chaque composant
 		GridPane grille = new GridPane();
 		grille.add(nom,0, 0,3,1);
 		grille.add(prenom, 0, 1,3,1);
@@ -269,6 +279,7 @@ public class Profil extends Application{
 		grille.add(mdpMauvais, 5, 5);
 		grille.add(modifStatut, 7, 6);
 		
+		// On met les labels génériques à droite
 		grille.setHalignment(nom, HPos.RIGHT);	
 		grille.setHalignment(prenom, HPos.RIGHT);		
 		grille.setHalignment(dateNais, HPos.RIGHT);		
@@ -276,22 +287,25 @@ public class Profil extends Application{
 		grille.setHalignment(mdp, HPos.RIGHT);	
 		grille.setHalignment(statut, HPos.RIGHT);		
 		
+		// Espacement entre les colonnes et les lignes dans le GridPane 
 		grille.setHgap(10);
 		grille.setVgap(10);
-
+		
+		// Ajoute le GridPane grille et l'ImageView photo de profil sur un ligne
 		HBox hbox = new HBox(10);
 		hbox.getChildren().addAll(grille,Affichage);
-
+		
+		// ?
 		grille.setAlignment(Pos.CENTER_RIGHT);
 		hbox.setAlignment(Pos.CENTER);
 		hbox.setMargin(grille, new Insets(0,50,0,50));
 		
+		// ?
 		VBox vbox = new VBox();
 		VBox.setMargin(titre, new Insets(0,0,50,0));
 		vbox.setAlignment(Pos.CENTER);
 		vbox.getChildren().addAll(titre,hbox);		
 		root.setCenter(vbox);
-
 
 		Scene scene=new Scene(root,1500,800);
         scene.getStylesheets().add(getClass().getResource("ProfilCSS.css").toExternalForm());
@@ -305,7 +319,7 @@ public class Profil extends Application{
 		launch(args);
 	}
 	
-	private void interactionButton(Button btn, double nb) {
+	private void interactionButton(Button btn, double nb) { // création d'un méthode pour modifier la taille d'un bouton
 		btn.setScaleX(nb);
 		btn.setScaleY(nb);
 	}
@@ -316,12 +330,12 @@ public class Profil extends Application{
 		dialog.setHeaderText("Modification du " + nom);
 		dialog.setContentText("Entrez: "+ nom);
 		dialog.getDialogPane().setStyle("-fx-font-size: 13; -fx-font-family:Calibri; -fx-font-weight:Bold; -fx-background-color: #F5F5F5");
-		Optional<String> result = dialog.showAndWait();
-		if(result.isPresent()) {
-			contenu.setText(result.get());
+		Optional<String> result = dialog.showAndWait();  // showAndWait permet d'afficher la boîte de dialogue de manière modale et d'attendre la réponse de l'utilisateur.
+		if(result.isPresent()) {// Onvérifie si l'utilisateur a cliqué sur OK et a fourni une valeur valide.
+			contenu.setText(result.get()); // get extrait la valeur encapsulée dans l'Optional et setText remplace le texte affiché dans contenu par la valeur saisie par l'utilisateur.
 		}
 	}
-    public void afficher() {// Mettre le code d'affichage de Steven ici
+    public void afficher() {
   
         StackPane root = new StackPane();
         Button button = new Button("Accueil");
