@@ -26,22 +26,38 @@ import javafx.stage.Stage;
 public class Connexion extends Application {
     
     public void start(Stage primaryStage) {
+    	// enelever heritage 
+    	BarreNavigation barreNavigation = new BarreNavigation();
+    	BorderPane conn = barreNavigation.getBorderPane();
     	
-    	BorderPane conn = new BorderPane();
-    	// Barre de navigation
-        HBox hbox = new HBox(10);
-        conn.setTop(hbox);
-        
-        
-        
-        hbox.setPadding(new Insets(10,20,10,20));
-        hbox.setStyle("-fx-background-color: #F5F5F5;");
-
-        ImageView imLogo = new ImageView(new Image(getClass().getResourceAsStream("/Photo/Logo.png")));
-        imLogo.setFitHeight(50);
-        imLogo.setFitWidth(150);
-        
-        hbox.getChildren().addAll(imLogo);
+    	
+    	//garder contact 
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	
         
         //contenu : 
@@ -94,15 +110,28 @@ public class Connexion extends Application {
         		String mailText = zonetext.getText();
         		String mdpText = mdp.getText();
         		// verifier que c non null
+        		
+        		//afficher un message en dessoous 
         		if(mailText.isEmpty() || mdpText.isEmpty()) {
         			Alert alerter = new Alert(Alert.AlertType.WARNING);
         			alerter.setTitle("Erreur");
         			alerter.showAndWait();
         		}
         		else {
+        			
         			Alert alerter = new Alert(Alert.AlertType.INFORMATION);
         			alerter.setTitle("Connexion à votre espace réussie");
         			alerter.showAndWait();
+        			
+        			// ici je redirection vers ma page d'accueil
+        			Stage accueil = new Stage();
+        			Accueil accueilPage = new Accueil();
+        			try {
+        				accueilPage.start(accueil);
+        				
+        			} catch (Exception e) {
+        				e.printStackTrace();
+        			}
         		}
         	}
         });
@@ -111,6 +140,7 @@ public class Connexion extends Application {
         conn.setCenter(root);
         root.getChildren().addAll(image_connexion,titre,sous_titre,email,zonetext,mot_de_passe ,mdp,se_connecter);
         Scene scene = new Scene(conn,900,800);
+        scene.getStylesheets().add(getClass().getResource("styleCahierTexte.css").toExternalForm());
         primaryStage.setTitle("Connexion");
         primaryStage.setScene(scene);
         primaryStage.show();
