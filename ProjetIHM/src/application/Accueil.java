@@ -31,14 +31,14 @@ public class Accueil extends Application {
         // Contenu principal
         VBox content = new VBox(20);
         content.setPadding(new Insets(20));
-        content.setAlignment(Pos.CENTER); //on positione les éléments au centre 
+        content.setAlignment(Pos.CENTER);
         root.setCenter(content);
 
         // Colonne pour les Cours
         VBox coursCol = new VBox(10);
-        coursCol.setAlignment(Pos.TOP_LEFT); //on positione les éléments a gauche
+        coursCol.setAlignment(Pos.TOP_LEFT); //on positione les éléments au centre 
         Label coursTitle = new Label("Cours");
-        coursTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        coursTitle.setStyle(" -fx-font-size: 20; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         
      // definir un id "pas de css" afin d'exclure le coursTitle du css
         coursTitle.setId("pasdeCss");
@@ -58,9 +58,9 @@ public class Accueil extends Application {
         
         coursItem1.addEventHandler(MouseEvent.MOUSE_CLICKED , cahierDeTexte);
        
-        coursItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        coursItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         Label coursItem2 = new Label("Calcul mental");
-        coursItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        coursItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
       //Evenement : 
         EventHandler<MouseEvent> calculMental = new EventHandler<MouseEvent>() {
@@ -72,8 +72,8 @@ public class Accueil extends Application {
         };
         coursItem2.addEventHandler(MouseEvent.MOUSE_CLICKED , calculMental);
 
-        Label coursItem3 = new Label("Belle figures");
-        coursItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        Label coursItem3 = new Label("Belle figures Géométrique");
+        coursItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
       //Evenement : 
         EventHandler<MouseEvent> figureGeometrique = new EventHandler<MouseEvent>() {
@@ -84,23 +84,10 @@ public class Accueil extends Application {
         	}
         };
         coursItem3.addEventHandler(MouseEvent.MOUSE_CLICKED , figureGeometrique);
+       
         
-
-        Label coursItem4 = new Label("Géométrie");
-        coursItem4.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
-        
-      //Evenement : 
-        EventHandler<MouseEvent> geometrie = new EventHandler<MouseEvent>() {
-        	@Override
-        	public void handle(MouseEvent e) {
-        		Geometrie geometriePage = new Geometrie(primaryStage);
-        		geometriePage.afficher();
-        	}
-        };
-        coursItem4.addEventHandler(MouseEvent.MOUSE_CLICKED , geometrie);
-        
-        Label coursItem5 = new Label("Tableau de numération");
-        coursItem5.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        Label coursItem4 = new Label("Tableau de numération");
+        coursItem4.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
         //Evenement : 
             EventHandler<MouseEvent> tableauNumeration = new EventHandler<MouseEvent>() {
@@ -110,17 +97,17 @@ public class Accueil extends Application {
             		numerationPage.afficher();
             	}
             };
-            coursItem5.addEventHandler(MouseEvent.MOUSE_CLICKED , tableauNumeration);
+            coursItem4.addEventHandler(MouseEvent.MOUSE_CLICKED , tableauNumeration);
         
         // Ajouts des elements à la colonne Cours
-        coursCol.getChildren().addAll(coursTitle, coursItem1, coursItem2, coursItem3, coursItem4, coursItem5);
+        coursCol.getChildren().addAll(coursTitle, coursItem1, coursItem2, coursItem3, coursItem4);
 
         // Colonne pour les Jeux
         VBox jeuxCol = new VBox(10);
         jeuxCol.setAlignment(Pos.TOP_LEFT);
         Label jeuxTitle = new Label("Jeux");
         VBox.setMargin(jeuxTitle, new Insets(0, 0, 20, 0));
-        jeuxTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        jeuxTitle.setStyle(" -fx-font-size: 20; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         
         // definir un id "pas de css" afin d'exclure le jeuxTitle du css
         jeuxTitle.setId("pasdeCss");
@@ -139,9 +126,9 @@ public class Accueil extends Application {
         jeuxItem1.addEventHandler(MouseEvent.MOUSE_CLICKED , echecs);
         
         
-        jeuxItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        jeuxItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         Label jeuxItem2 = new Label("Cartes à jouer");
-        jeuxItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        jeuxItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
         
       //Evenement : 
@@ -155,7 +142,7 @@ public class Accueil extends Application {
         jeuxItem2.addEventHandler(MouseEvent.MOUSE_CLICKED , cartes);
         
         Label jeuxItem3 = new Label("Paper Toys");
-        jeuxItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        jeuxItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
       //Evenement : 
         EventHandler<MouseEvent> paperToys = new EventHandler<MouseEvent>() {
@@ -176,14 +163,14 @@ public class Accueil extends Application {
         ressourcesCol.setAlignment(Pos.TOP_LEFT);
         Label ressourcesTitle = new Label("Ressources externes");
         VBox.setMargin(ressourcesTitle, new Insets(0, 0, 20, 0));
-        ressourcesTitle.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        ressourcesTitle.setStyle("-fx-font-size: 20; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         
         // definir un id "pas de css" afin d'exclure le ressourcesTitle du css
         ressourcesTitle.setId("pasdeCss");
         
        // Ajout des Items avec les Evénements 
         Label ressourcesItem1 = new Label("Portail d’informations mathématiques");
-        ressourcesItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        ressourcesItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
       //Evenement : 
         EventHandler<MouseEvent> ressourcesExternes = new EventHandler<MouseEvent>() {
@@ -198,7 +185,7 @@ public class Accueil extends Application {
         
         
         Label ressourcesItem2 = new Label("Calculatrice");
-        ressourcesItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        ressourcesItem2.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
       //Evenement : 
         EventHandler<MouseEvent> calculatrice = new EventHandler<MouseEvent>() {
@@ -212,7 +199,7 @@ public class Accueil extends Application {
         
         
         Label ressourcesItem3 = new Label("Algoblocs");
-        ressourcesItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        ressourcesItem3.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
       //Evenement : 
         EventHandler<MouseEvent> algoblocs = new EventHandler<MouseEvent>() {
@@ -227,7 +214,7 @@ public class Accueil extends Application {
         
         
         Label ressourcesItem4 = new Label("LaboMEP");
-        ressourcesItem4.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        ressourcesItem4.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';-fx-font-size: 16;");
         
       //Evenement : 
         EventHandler<MouseEvent> laboMEP = new EventHandler<MouseEvent>() {
@@ -254,7 +241,7 @@ public class Accueil extends Application {
         content.getChildren().add(colonnes);
 
         // configuration de scene
-        Scene scene = new Scene(root, 900, 600);
+        Scene scene = new Scene(root, 1300, 600);
         // ajout du Css pour personnaliser notre interface
         scene.getStylesheets().add(getClass().getResource("Accueilstyle.css").toExternalForm());
         primaryStage.setTitle("Accueil");
