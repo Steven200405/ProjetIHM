@@ -33,33 +33,38 @@ import javafx.scene.control.CheckBox;
 public class CahierTexte extends BarreNavigation {
 	
 	public CahierTexte(Stage primaryStage) {
-		super();
-		//Page de textes
+		super(); // héritage de la barre de navigation dans Cahier de texte
 		VBox grandVBox = new VBox();
-		root.setCenter(grandVBox);
+		root.setCenter(grandVBox); // On met le contenu du Cahier de texte dans un VBox
 		
 		Label titre = new Label("CAHIER DE TEXTES");
+		// Décoration du titre 
 		titre.setTextFill(Color.web("#2233AA"));
 		titre.setFont(Font.font("Calibri", FontWeight.BOLD, 45));
-		HBox conteneurTitre = new HBox ();
+		
+		// Positionne le titre au centre de la ligne
+		HBox conteneurTitre = new HBox();
 		conteneurTitre.getChildren().add(titre);
 		conteneurTitre.setAlignment(Pos.CENTER);
 		conteneurTitre.setMargin(titre, new Insets(60, 0, 0, 0));
 
 		Label sous_titre = new Label ("6_E - MATHEMATIQUES - M.CRESPIN");
-		sous_titre.setFont(Font.font("Calibri", FontWeight.BOLD, 25));
+		// Décoration du sous-titre
 		sous_titre.setTextFill(Color.web("#44725d"));
+		sous_titre.setFont(Font.font("Calibri", FontWeight.BOLD, 25));
+		
+		// Positionne le sous-titre au centre de la ligne
 		HBox conteneurSousTitre = new HBox();
 		conteneurSousTitre.getChildren().add(sous_titre);
 		conteneurSousTitre.setAlignment(Pos.CENTER);
 		conteneurSousTitre.setMargin(sous_titre, new Insets(0, 0, 100, 0));
 		
+		// Création des historiques de cours et devoirs par date
 		VBox dateContent = new VBox();
-		Accordion accordion = new Accordion(); // ajout de boutons déroulantes
+		Accordion accordion = new Accordion(); // Accordion prend un groupe de TitledPane. Seul un TitlePane peut être ouvert à la fois.
 		grandVBox.setMargin(accordion, new Insets(0, 100, 0, 100));
-
-		TitledPane dateLabel1 = new TitledPane(); // TitledPane est un panneau avec un titre qui peut être ouvert ou fermé. TitledPance est une extension de Labeled.		
 		
+		// Historique de cours pour une date 
 		Image etoile = new Image(getClass().getResourceAsStream("/Photo/etoile.png"));
 		ImageView ImEtoile1 = new ImageView(etoile);
 		ImEtoile1.setFitHeight(50);
@@ -68,6 +73,7 @@ public class CahierTexte extends BarreNavigation {
 		titleSeance.setFont(Font.font("Calibri", FontWeight.BOLD, 14));
 		titleSeance.setTextFill(Color.web("#2233AA"));
 		
+		// Création d'un événement de redirection sur un Label
 		Label probleme140 = new Label("Problème n° 140.");
 		Hyperlink correctionProbleme140 = new Hyperlink("[Correction]");
 		EventHandler <MouseEvent> c = new EventHandler <MouseEvent> () {
@@ -79,7 +85,8 @@ public class CahierTexte extends BarreNavigation {
 		};
 		correctionProbleme140.addEventHandler(MouseEvent.MOUSE_CLICKED, c);
 		
-		HBox seanceLine1 = new HBox ();
+		// Création d'un conteneur horizontal comprenant un contenu pour une date
+		HBox seanceLine1 = new HBox (); 
 		seanceLine1.getChildren().addAll(probleme140, correctionProbleme140);
 		
 		Label exercice9 = new Label("Exercice n°9.");
@@ -93,9 +100,11 @@ public class CahierTexte extends BarreNavigation {
 		};
 		correctionExercice9.addEventHandler(MouseEvent.MOUSE_CLICKED, d);
 		
+		// Création d'un second conteneur horizontal comprenant un autre contenu pour une date
 		HBox seanceLine2 = new HBox ();
 		seanceLine2.getChildren().addAll(exercice9, correctionExercice9);
 		
+		// Création d'un événement de redirection "interne", pas sur le Web
 		Hyperlink consigneBelleFigure = new Hyperlink("Consignes pour la construction de belles figure de géométrie.");
 		EventHandler <MouseEvent> allerBelleFigure = new EventHandler <MouseEvent> () {
 			@Override
@@ -103,14 +112,12 @@ public class CahierTexte extends BarreNavigation {
 				//Redirection vers la page Belle figure
 				Stage ThirdyStage = new Stage();
 				Figure belleFigure = new Figure(ThirdyStage);	
-				belleFigure.afficher(); // Naviguer vers Accueil
+				belleFigure.afficher(); // Afficher Accueil
 			}
 		 };		        
 		 consigneBelleFigure.addEventHandler(MouseEvent.MOUSE_CLICKED, allerBelleFigure);
 
-		
-		
-		Hyperlink debutConstruction = new Hyperlink("Début d'une construction."); // a faire : renvoie vers la page "belles figures de géométrie"		
+		Hyperlink debutConstruction = new Hyperlink("Début d'une construction.");	
 		EventHandler <MouseEvent> g = new EventHandler <>() {
 			@Override 
 			public void handle(MouseEvent e) {
@@ -120,13 +127,14 @@ public class CahierTexte extends BarreNavigation {
 		};
 		debutConstruction.addEventHandler(MouseEvent.MOUSE_CLICKED, g);
 		
-	
+		// Ajoute tout l'historique de cours pour une date dans un VBox
 		dateContent.setMargin(seanceLine1, new Insets(0, 0, 0, 50));
 		dateContent.setMargin(seanceLine2, new Insets(0, 0, 0, 50));
 		dateContent.setMargin(consigneBelleFigure, new Insets(0, 0, 0, 50));
 		dateContent.setMargin(debutConstruction, new Insets(0, 0, 0, 50));
 		dateContent.getChildren().addAll(titleSeance, seanceLine1, seanceLine2, consigneBelleFigure, debutConstruction);
 		
+		// Contenu des devoirs pour une date
 		Image fleche = new Image(getClass().getResourceAsStream("/Photo/fleche.png"));
 		ImageView ImFleche1 = new ImageView (fleche);
 		ImFleche1.setFitHeight(50);
@@ -135,22 +143,19 @@ public class CahierTexte extends BarreNavigation {
 		titreDevoir.setFont(Font.font("Calibri", FontWeight.BOLD, 14));
 		titreDevoir.setTextFill(Color.web("#2233AA"));
 		
-		
+		// Création d'une case à cocher 
 		CheckBox devoirLine= new CheckBox("Rendre une construction de géométrie de son choix (ne pas oublier d'indiquer de quoi il s'agit.)");
 		dateContent.setMargin(devoirLine, new Insets(0, 0, 0, 50));
 		
+		// Ajout du titre 'Devoir' et de la case à cocher dans le VBOX
 		dateContent.getChildren().addAll(titreDevoir, devoirLine);
+		TitledPane dateLabel1 = new TitledPane(); // TitledPane est un panneau avec un titre qui peut être ouvert ou fermé. TitledPance est une extension de Labeled.		
 		dateLabel1.setText("Lundi 4 novembre 2024");
 		dateLabel1.setFont(Font.font("Calibri", FontWeight.BOLD,14));
 		dateLabel1.setContent(dateContent);
-		dateLabel1.setAlignment(Pos.CENTER);
+		dateLabel1.setAlignment(Pos.CENTER); // Mettre la date au milieu
 		
-		dateContent.setMargin(seanceLine1, new Insets(0, 0, 0, 50));
-		dateContent.setMargin(seanceLine2, new Insets(0, 0, 0, 50));
-		dateContent.setMargin(consigneBelleFigure, new Insets(0, 0, 0, 50));
-		dateContent.setMargin(debutConstruction, new Insets(0, 0, 0, 50));
-		
-		
+		// Création d'un deuxième panneau avec son contenu dans un VBox
 		TitledPane dateLabel2 = new TitledPane();
 		dateLabel2.setText("Jeudi 17 octobre 2024");
 		dateLabel2.setAlignment(Pos.CENTER);
@@ -202,8 +207,9 @@ public class CahierTexte extends BarreNavigation {
 		
 		Label phrase = new Label ("Problème n° 140. Cherché par certains élèves. ");
 		HBox seanceLine4 = new HBox ();
-		seanceLine4.getChildren().addAll(phrase, enonceProbleme140);		
+		seanceLine4.getChildren().addAll(phrase, enonceProbleme140);	
 		
+		// Ajoute tous le contenu du cours à une date dans le VBox
 		dateContent2.getChildren().addAll(titleSeance2, presentationExpo, evaluationCourte, seanceLine3, seanceLine4);
 		
 		ImageView ImFleche2 = new ImageView (fleche);
@@ -220,9 +226,10 @@ public class CahierTexte extends BarreNavigation {
 		dateContent2.setMargin(seanceLine3, new Insets(0, 0, 0, 50));
 		dateContent2.setMargin(seanceLine4, new Insets(0, 0, 0, 50));
 		
+		// Ajout des devoirs et titre Devoir
 		dateContent2.getChildren().addAll(titreDevoir2, devoirLine2);
 
-		
+		// Ajoute les TitledPane dans l'Accordion
 		accordion.getPanes().addAll(dateLabel1, dateLabel2);
 		
 		grandVBox.getChildren().addAll(conteneurTitre, conteneurSousTitre, accordion);
