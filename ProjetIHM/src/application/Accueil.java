@@ -38,6 +38,7 @@ public class Accueil extends Application {
         coursCol.setAlignment(Pos.TOP_LEFT);
         Label coursTitle = new Label("Cours");
         coursTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        coursTitle.setId("pasdeCss");
         VBox.setMargin(coursTitle, new Insets(0, 0, 20, 0));
         Label coursItem1 = new Label("Cahier de texte");
         
@@ -120,6 +121,7 @@ public class Accueil extends Application {
         Label jeuxTitle = new Label("Jeux");
         VBox.setMargin(jeuxTitle, new Insets(0, 0, 20, 0));
         jeuxTitle.setStyle(" -fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        jeuxTitle.setId("pasdeCss");
         Label jeuxItem1 = new Label("Apprentissage du jeu d’échecs");
         
       //Evenement : 
@@ -169,6 +171,7 @@ public class Accueil extends Application {
         Label ressourcesTitle = new Label("Ressources externes");
         VBox.setMargin(ressourcesTitle, new Insets(0, 0, 20, 0));
         ressourcesTitle.setStyle("-fx-font-size: 16; -fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
+        ressourcesTitle.setId("pasdeCss");
         Label ressourcesItem1 = new Label("Portail d’informations mathématiques");
         ressourcesItem1.setStyle("-fx-font-weight: bold;-fx-text-fill: #2233AA; -fx-font-family: 'Calibri (MS)';");
         
@@ -229,13 +232,19 @@ public class Accueil extends Application {
         ressourcesCol.getChildren().addAll(ressourcesTitle, ressourcesItem1, ressourcesItem2, ressourcesItem3, ressourcesItem4);
 
         HBox colonnes = new HBox(170, coursCol, jeuxCol, ressourcesCol);
+        
+        //ici j'ai utilisé le setHgrow sur mon Hbox afin d'ajuster mon interface en fonction de la taille de la fenetre 
+        HBox.setHgrow(coursCol, Priority.ALWAYS);
+        HBox.setHgrow(jeuxCol, Priority.ALWAYS);
+        HBox.setHgrow(ressourcesCol, Priority.ALWAYS);
+        
         colonnes.setAlignment(Pos.CENTER);
-
+        
         content.getChildren().add(colonnes);
 
         // Scene configuration
         Scene scene = new Scene(root, 900, 600);
-        scene.getStylesheets().add(getClass().getResource("styleCahierTexte.css").toExternalForm());
+        //scene.getStylesheets().add(getClass().getResource("styleCahierTexte.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("Accueilstyle.css").toExternalForm());
         primaryStage.setTitle("Accueil");
         primaryStage.setScene(scene);
