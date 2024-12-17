@@ -1,7 +1,6 @@
 package application;
 import javafx.stage.Stage;
 import java.util.Optional;
-import javafx.application.Application;
 import javafx.css.Size;
 import javafx.event.EventHandler;
 import javafx.scene.layout.BorderPane;
@@ -30,10 +29,12 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckBox;
 
-public class CahierTexte extends BarreNavigation {
+public class CahierDeTexte extends BarreNavigation {
 	
-	public CahierTexte(Stage primaryStage) {
-		super(); // héritage de la barre de navigation dans Cahier de texte
+	private VBox vbox;
+	
+	public CahierDeTexte(Stage primaryStage, BorderPane root) {
+		//Page de textes
 		VBox grandVBox = new VBox();
 		root.setCenter(grandVBox); // On met le contenu du Cahier de texte dans un VBox
 		
@@ -112,7 +113,7 @@ public class CahierTexte extends BarreNavigation {
 				//Redirection vers la page Belle figure
 				Stage ThirdyStage = new Stage();
 				Figure belleFigure = new Figure(ThirdyStage);	
-				belleFigure.afficher(); // Afficher Accueil
+				root.setCenter(belleFigure.getGridPane());
 			}
 		 };		        
 		 consigneBelleFigure.addEventHandler(MouseEvent.MOUSE_CLICKED, allerBelleFigure);
@@ -152,7 +153,7 @@ public class CahierTexte extends BarreNavigation {
 		TitledPane dateLabel1 = new TitledPane(); // TitledPane est un panneau avec un titre qui peut être ouvert ou fermé. TitledPance est une extension de Labeled.		
 		dateLabel1.setText("Lundi 4 novembre 2024");
 		dateLabel1.setFont(Font.font("Calibri", FontWeight.BOLD,14));
-		dateLabel1.setContent(dateContent);
+		dateLabel1.setContent(dateContent)// On met dans le TitledPane dataLabel2 un VBox nommé dateContent2
 		dateLabel1.setAlignment(Pos.CENTER); // Mettre la date au milieu
 		
 		// Création d'un deuxième panneau avec son contenu dans un VBox
@@ -162,7 +163,7 @@ public class CahierTexte extends BarreNavigation {
 		dateLabel2.setFont(Font.font("Calibri", FontWeight.BOLD,14));
 		
 		VBox dateContent2 = new VBox();
-		dateLabel2.setContent(dateContent2);
+		dateLabel2.setContent(dateContent2);// On met dans le TitledPane dataLabel2 un VBox nommé dateContent2
 		ImageView ImEtoile2 = new ImageView(etoile);
 		ImEtoile2.setFitHeight(50);
 		ImEtoile2.setFitWidth(50);
@@ -233,10 +234,12 @@ public class CahierTexte extends BarreNavigation {
 		accordion.getPanes().addAll(dateLabel1, dateLabel2);
 		
 		grandVBox.getChildren().addAll(conteneurTitre, conteneurSousTitre, accordion);
-		Scene scene = new Scene(root, 400, 500);
-		scene.getStylesheets().add(getClass().getResource("styleCahierTexte.css").toExternalForm());
-		primaryStage.setScene(scene);
-		
+		grandVBox.getStylesheets().add(getClass().getResource("styleCahierTexte.css").toExternalForm());
+		this.vbox=grandVBox;
+	}
+	
+	public VBox getVBox() {
+		return this.vbox;
 	}
 
 }
