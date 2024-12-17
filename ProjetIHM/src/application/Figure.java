@@ -25,7 +25,7 @@ public class Figure extends Application {
         navbar.setPadding(new Insets(10));
         navbar.setSpacing(10);
         navbar.setAlignment(Pos.CENTER_LEFT);
-        navbar.setStyle("-fx-background-color: #ececec; -fx-border-color: #cccccc;");
+        navbar.setStyle("-fx-background-color: #ececec;");  
 
         ImageView imLogo = new ImageView(new Image(getClass().getResourceAsStream("/Photo/Logo.png")));
         imLogo.setFitHeight(90);
@@ -100,11 +100,14 @@ public class Figure extends Application {
         root.setTop(navbar);
         root.setCenter(gridPane);
 
+        root.setStyle("-fx-background-color: #ececec;");
+
         Scene scene = new Scene(root, 1200, 800);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
+    // Crée une section avec un fond gris clair, titre et description
     private VBox createSection(String titleText, String descriptionText, Image image, Hyperlink... links) {
         VBox section = new VBox(10);
         section.setPadding(new Insets(15));
@@ -120,7 +123,7 @@ public class Figure extends Application {
         description.setFont(Font.font("Arial", 16));
         description.setWrapText(true);
 
-        // Ajouter l'image si elle existe
+        // Si une image est fournie, l'ajouter à la section
         if (image != null) {
             ImageView imageView = new ImageView(image);
             imageView.setFitHeight(100);
@@ -129,6 +132,8 @@ public class Figure extends Application {
         }
 
         section.getChildren().addAll(title, description);
+
+        // Si des liens sont fournis, les afficher sous forme de HBox
         if (links.length > 0) {
             HBox linkBox = new HBox(10);
             linkBox.setAlignment(Pos.CENTER);
@@ -139,6 +144,7 @@ public class Figure extends Application {
         return section;
     }
 
+    // Crée une section avec un fond blanc, titre, description, image et liens
     private VBox createSectionWithWhiteBackground(String titleText, String descriptionText, Image image, Hyperlink... links) {
         VBox section = new VBox(10);
         section.setPadding(new Insets(15));
@@ -154,6 +160,7 @@ public class Figure extends Application {
         description.setFont(Font.font("Arial", 16));
         description.setWrapText(true);
 
+        // Si une image est fournie, l'ajouter à la section
         if (image != null) {
             ImageView imageView = new ImageView(image);
             imageView.setFitHeight(100);
@@ -163,6 +170,7 @@ public class Figure extends Application {
 
         section.getChildren().addAll(title, description);
 
+        // Si des liens sont fournis, les afficher sous forme de HBox
         if (links.length > 0) {
             HBox linkBox = new HBox(10);
             linkBox.setAlignment(Pos.CENTER);
