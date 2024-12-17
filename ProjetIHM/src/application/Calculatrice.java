@@ -18,10 +18,10 @@ import javafx.scene.layout.Priority;
 
 public class Calculatrice extends Application {
 
-    private String currentInput = "0";
-    private String previousInput = "";
-    private String operator = "";
-    private boolean isOperatorPressed = false;
+    private String currentInput = "0";  // Valeur actuelle affichée
+    private String previousInput = "";  // Valeur précédente
+    private String operator = "";  // Opérateur en cours
+    private boolean isOperatorPressed = false;  // Indicateur si un opérateur a été pressé
 
     @Override
     public void start(Stage primaryStage) {
@@ -61,7 +61,7 @@ public class Calculatrice extends Application {
         hbox.getChildren().addAll(imLogo, spacer, accueil, outil, ressource, profil, contact);
         root.setTop(hbox);
 
-        Label displayLabel = new Label(currentInput);
+        Label displayLabel = new Label(currentInput);  // Étiquette affichant la valeur courante
         displayLabel.setFont(new Font("Arial", 40));
         displayLabel.setMinWidth(300);
         displayLabel.setAlignment(Pos.CENTER_RIGHT);
@@ -70,7 +70,7 @@ public class Calculatrice extends Application {
 
         VBox calculatorLayout = new VBox(10);
         calculatorLayout.setAlignment(Pos.CENTER);
-        calculatorLayout.setPadding(new Insets(10)); 
+        calculatorLayout.setPadding(new Insets(10));
 
         calculatorLayout.getChildren().add(displayLabel);
 
@@ -82,6 +82,7 @@ public class Calculatrice extends Application {
             {"0", "", ".", "="}
         };
 
+        // Création des boutons de la calculatrice
         for (String[] row : buttonText) {
             HBox buttonRow = new HBox(10);
             buttonRow.setAlignment(Pos.CENTER);
@@ -94,12 +95,14 @@ public class Calculatrice extends Application {
                 button.setMinSize(80, 80);
                 button.setStyle("-fx-border-color: blue; -fx-border-width: 1px; -fx-background-color: lightgray;");
 
+                // Personnalisation de la couleur des boutons spéciaux
                 if ("C".equals(text)) {
                     button.setStyle("-fx-background-color: yellow; -fx-border-color: blue; -fx-border-width: 1px;");
                 } else if ("DEL".equals(text)) {
                     button.setStyle("-fx-background-color: red; -fx-border-color: blue; -fx-border-width: 1px;");
                 }
 
+                // Action à effectuer lors de l'appui sur un bouton
                 button.setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) {
                         gererButtonClick(text, displayLabel);
@@ -125,14 +128,15 @@ public class Calculatrice extends Application {
     }
 
     private void gererButtonClick(String text, Label displayLabel) {
+        // Gestion des clics sur les boutons
         if (text.equals("C")) {
-            currentInput = "0";
+            currentInput = "0";  // Réinitialiser l'affichage
             previousInput = "";
             operator = "";
             isOperatorPressed = false;
         } else if (text.equals("DEL")) {
             if (currentInput.length() > 1) {
-                currentInput = currentInput.substring(0, currentInput.length() - 1);
+                currentInput = currentInput.substring(0, currentInput.length() - 1);  // Supprimer un chiffre
             } else {
                 currentInput = "0";
             }
@@ -140,7 +144,7 @@ public class Calculatrice extends Application {
             if (!previousInput.isEmpty() && !operator.isEmpty()) {
                 double result = Operation(Double.parseDouble(previousInput),
                         Double.parseDouble(currentInput), operator);
-                currentInput = String.valueOf(result);
+                currentInput = String.valueOf(result);  // Afficher le résultat
                 previousInput = "";
                 operator = "";
                 isOperatorPressed = false;
@@ -164,17 +168,18 @@ public class Calculatrice extends Application {
                 isOperatorPressed = false;
             } else {
                 if (currentInput.equals("0") && !text.equals(".")) {
-                    currentInput = text;
+                    currentInput = text;  // Remplacer le "0" par un autre chiffre
                 } else {
-                    currentInput += text;
+                    currentInput += text;  // Ajouter le chiffre à l'affichage
                 }
             }
         }
 
-        displayLabel.setText(currentInput);
+        displayLabel.setText(currentInput);  // Mettre à jour l'affichage
     }
 
     private double Operation(double num1, double num2, String operator) {
+        // Effectuer les calculs en fonction de l'opérateur
         if (operator.equals("+")) {
             return num1 + num2;
         } else if (operator.equals("-")) {
@@ -183,15 +188,15 @@ public class Calculatrice extends Application {
             return num1 * num2;
         } else if (operator.equals("/")) {
             if (num2 != 0) {
-                return num1 / num2;
+                return num1 / num2;  // Division
             } else {
-                return 0;
+                return 0;  // Si division par zéro, retour de 0
             }
         }
         return 0;
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(args);  
     }
 }
